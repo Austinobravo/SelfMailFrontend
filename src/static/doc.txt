@@ -1,0 +1,67 @@
+list
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const BlogList = () => {
+  const [blogPosts, setBlogPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://your-django-api-url/api/blog-posts/')
+      .then(response => {
+        setBlogPosts(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+  return (
+    <div>
+      {blogPosts.map(post => (
+        <div key={post.id}>
+          <h2>{post.title}</h2>
+          <p>{post.summary}</p>
+          {/* Link to detail view */}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default BlogList;
+
+
+detail
+
+import React from 'react';
+
+const BlogDetail = ({ post }) => {
+  return (
+    <div className="blog-detail">
+      <h2>{post.title}</h2>
+      <p className="author">{`By ${post.author}`}</p>
+      <p className="date">{`Published on ${post.publish_date}`}</p>
+      <div className="content">{post.content}</div>
+    </div>
+  );
+};
+
+export default BlogDetail;
+
+errordetail
+
+import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
+
+const BlogDetail = ({ post }) => {
+  return (
+    <div className="blog-detail">
+      <h2>{post.title}</h2>
+      <p className="author">{`By ${post.author}`}</p>
+      <p className="date">{`Published on ${post.publish_date}`}</p>
+      <div className="content">{ReactHtmlParser(post.content)}</div>
+    </div>
+  );
+};
+
+export default BlogDetail;

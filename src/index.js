@@ -3,6 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './static/css/bootstrap.min.css'
+import './static/css/bootstrap-icons.css'
+import './static/css/selfmail.css'
+// import './static/js/jquery.sticky.js'
+// import './static/js/click-scroll.js'
+// import './static/js/custom.js'
+// import './static/js/jquery.min.js'
+import './static/js/bootstrap.bundle.min.js'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
