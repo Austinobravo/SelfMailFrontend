@@ -7,6 +7,7 @@ const Form = () =>{
     const [isSending, setIsSending] = useState(false);
     const [isGeneratingAI, setIsGeneratingAI] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const navigate = useNavigate()
     const [generatedDescription, setGeneratedDescription] = useState({description:''});
     // const [emailDetails, setEmailDetails] = useState([])
@@ -17,9 +18,10 @@ const Form = () =>{
     files: [],
     description: '',
     })
-
+    
     const openai = async () =>{
         setIsGeneratingAI(true);
+        setIsButtonDisabled(true);
 
         // const descriptionToSend = new generatedDescription()
         // descriptionToSend.append('description', generatedDescription.description)
@@ -50,6 +52,7 @@ const Form = () =>{
         finally {
             // Reset loading state to false after the request is complete
             setIsGeneratingAI(false);
+            setIsButtonDisabled(false);
         }
         };
     const handleOpenAIButtonClick = () => {
@@ -176,7 +179,7 @@ const Form = () =>{
                                             }));
                                         }}
                                         style={{ float: 'right', marginTop: '10px', background:'#E76F51', color:"#fff", fontWeight:400,borderRadius: '10px', border:0,fontSize:'16px'}}
-                                        disabled={isGenerating}
+                                        disabled={isButtonDisabled || isGeneratingAI}
                                         >
 
                                         
